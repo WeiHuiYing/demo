@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+	/*
+		continue语句结束当前（或标签）的循环语句的本次迭代，并继续执行循环的下一次迭代
+		continue[label]-----label标识标号关联的语句
+		与break语句的区别在于，continue并不会终止循环的迭代，而是：在while循环中，控制流跳转回条件判断；在for循环中，控制流跳转到更新语句
+		continue语句可以包含一个可选的标号以控制程序跳转到制定循环的下一次迭代，而非当前循环。此时要求continue语句在对应的循环内部
+	*/
+ var i = 0;
+ var n = 0;
+ while(i<5){
+	i++;
+	if(i===3){
+		console.log(i)
+		//continue;
+		break;
+	}
+	n+=i;
+	console.log(i);
+	console.log(n);
+}
+
+/*
+continue输出
+1
+1
+2
+3
+3
+4
+7
+5
+12
+break输出
+1
+1
+2
+3
+3
+*/
+
+var i = 0;
+	j = 8;
+checkiandj:while(i<4){
+	console.log("i: " + i);
+	i+=1;
+	checkj:while(j > 4){
+		console.log("j: " + j);
+		j -=1;
+		if((j%2) == 0)
+			continue checkj;
+		console.log(j + "is odd.");
+	}
+	console.log("i = " + i);
+	console.log("j = " + j);
+}
+/*
+输出
+"i: 0"
+
+"j: 8"
+"7 is odd."
+"j: 7"
+"j: 6"
+"5 is odd."
+"j: 5"
+
+
+
+"i = 1" 
+"j = 4" 
+
+"i: 1"
+"i = 2" 
+"j = 4"
+
+"i: 2"
+"i = 3"
+"j = 4"
+
+"i: 3"
+"i = 4"
+"j = 4"
+*/
+</script>
+</body>
+</html>

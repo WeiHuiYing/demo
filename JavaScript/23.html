@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+	//语句块（或其他语言中的复合语句）用来组织零个或多条语句，用一对花括号界定语句块
+	/*{
+		statement_1;
+		statement_2;
+		...
+		statement_n;
+	}
+	statement_1,statement_2,statement_n语句都包裹在语句块中
+	*/
+	var x = 0;
+	while(x<10){
+		x++;
+		console.log(x);
+	}
+	/*
+		块级作用域
+		使用var，通过var声明的变量没有块级作用域，在语句块里声明的变量作用域是其所在的函数或者script标签内，你可以在语句块外面访问到它，语句块不会生成一个新的作用域，尽管单独的语句块是合法的语句，但在JavaScript中你不会想使用单独的语句块
+		
+	*/
+	var y = 1;
+	{
+		var y = 2;
+	}
+	console.log(y);//输出2
+	let z = 1;
+	{
+		let z = 2;
+	}
+	console.log(z);//输出1
+	const a = 1;
+	{
+		const a = 2;
+	}
+	console.log(a);//输出1
+</script>
+</body>
+</html>

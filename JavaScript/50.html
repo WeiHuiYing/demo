@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+/*
+constructor和class一起用来创建和初始化对象的特殊方法
+constructor([arguments]){...}
+一个class中只能有一个指定的“constructor”（构造）方法。如果class定义的时候包含多个构造方法，程序将会抛出SyntaxError错误
+在构造方法中可以使用super关键字来调用父类的构造方法。
+如果没有显式指定构造方法，则会添加默认的constructor方法
+*/
+class Square extends Polygon{
+	constructor(length){
+		super(length,length);
+		this.name = 'Square';
+	}
+	get area(){
+		return this.height*this.width;
+	}
+	set area(value){
+		this.area = value;
+	}
+}
+//默认构造方法
+constructor(){}
+constructor(...args){
+	super(...args)
+}
+</script>
+</body>
+</html>

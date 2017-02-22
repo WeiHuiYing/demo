@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+	function f1(){
+		return this;
+	}
+	f1()===window;
+	function f2(){
+		"use strict";
+		return this;
+	}
+	f2()===undefined;
+	var o = {prop:37};
+	function independent(){
+		return this.prop;
+	}
+	console.log(o.f());
+	var o = { prop : 37 };
+	function independent(){
+		return this.prop;
+	}
+	o.f = independent;
+	console.log(o.f());
+	o.b = {
+		g:independent,
+		prop:42
+	};
+	console.log(o.b.g());
+	var o = {
+		f : function(){
+			return this.a + this.b;
+		}
+	};
+	var p = Object.create(o);
+	p.a = 1;
+	p.b = 4;
+	console.log(p.f());
+	function modulus(){
+		return Math.sqrt(this.re * this.re + this.im * this.im);
+	}
+	var o = {
+		re: 1,
+		im: -1,
+		get phase(){
+			return Math.atan2(this.im,this.re);
+		}
+	};
+	Object.defineProperty(o,'modulus',{
+		get:modulus,enumerable:true,configurable:true
+	});
+	console.log(o.phase,o.modulus);
+	function C(){
+		this.a = 37;
+	}
+	var o = new C();
+	console.log(o.a);
+	function C2(){
+		this.a = 37;
+		return {a:38};
+	}
+	o = new C2();
+	console.log(o.a);
+	//call和apply
+	function add(c,d){
+		return this.a + this.b + c + d;
+	}
+	var o = {a:1,b:3};
+	add.call(o,5,7);
+	add.apply(o,[10,20]);
+	function bar(){
+		console.log(Object.prototype.toString.call(this));
+	}
+	bar.call(7);
+	function f(){
+		return this.a;
+	}
+	var g = f.bind({a:"azerty"});
+	console.log(g());
+	var o = {a:37,f:f,g:g};
+	function bluify(e){
+		console.log(this === e.currentTarget);
+		this.style.backgroundColor = 'red';
+	}
+	var elements = document.getElementById('*');
+	for(var i = 0;i<elements.lenght;i++){
+		elements[i].addEventListener('click',bluify,false);
+	}
+</script>
+</body>
+</html>

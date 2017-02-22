@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+/*
+for(variable in object){...}
+variable每次迭代，一个不同的属性名将会赋予variable
+object可枚举属性被迭代的对象
+for...in 循环只遍历可枚举属性。像Array和Object使用内置构造函数所创建的对象都会继承自Object.prototype和String.prototype的不可枚举属性。
+*/
+
+var obj = {a:1,b:2,c:3};
+for(var prop in obj){
+	console.log("obj." + prop + " = " + obj[prop]);
+}
+var triangle = {a:1,b:2,c:3};
+function ColoredTriangle(){
+	this.color = "red";
+}
+ColoredTeiangle.prototype = triangle;
+var obj = new ColoredTriangle();
+for(var prop in obj){
+	if(obj.hasOwnProperty( prop )){
+		console.log("o." + prop + " = " + obj[prop]);
+	}
+}
+
+/*
+for(variable of object){
+	statement
+}
+*/
+
+//遍历数组
+let iterable = [10,20,30];
+for (let value of iterable){
+	console.log(value);
+}
+
+for(const value of iterable){
+	console.log(value);
+}
+
+//遍历String
+let iterable = "boo";
+for(let value of iterable){
+	console.log(value);
+}
+
+//遍历TypedArray
+let iterable = new Uint8Array([0x00,0xff]);
+for(let value of iterable){
+	console.log(value);
+}
+
+//遍历Map
+let iterable = new Map([["a",1],["b",2],["c",3]]);
+for(let entry iterable){
+	console.log(entry);
+}
+for(let entry of iterable){
+	console.log(value);
+}
+
+//遍历Set
+let iterable new Set([1,1,2,2,3,3]);
+for(let value of iterable){
+	console.log(value);
+}
+
+//遍历生成器
+function* fibonacci(){
+	let [prev,curr] = [0,1];
+	for(;;){
+		[prev,curr] = [curr,prev + curr];
+		yield curr;
+	}
+}
+
+for(let n of fibonacci()){
+	if(n>1000)
+	break;
+	console.log(n)
+}
+
+var iterable = {
+	[Symbol.iterator](){
+		return{
+			i:0,
+			next(){
+				if(this.i < 3){
+					return {value: this.i++,done: false};
+				}
+				return {value: undefined,done:true};
+			}
+		}
+	}
+}
+
+for(var value of iterable){
+	console.log(value);
+}
+
+Object.prototype.objCustom = function(){};
+Array.prototype.arrCustom = function(){};
+let iterable = [3,5,7];
+iterable.foo = "hello";
+for(let i in iterable){
+	console.log(i)
+}
+for(let i of interable){
+	console.log(i)	
+}
+</script>
+</body>
+</html>

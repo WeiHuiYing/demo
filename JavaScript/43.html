@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+/*
+基础语法：
+(param1,param2,...,paramN) => {statements}
+(param1,param2,...,paramN) => expression
+		//equivalent to: =>{return expression;}
+如果只有一个参数，圆括号是可选的：
+(singleParam) => {statements}
+singleParam => {statements}
+无参数的函数需要使用圆括号：
+() => {statements}
+高级语法：
+返回对象字面量时应当用圆括号将其抱起来：
+params => ({foo:bar})
+支持Rest parameters 和 default parameters:
+(param1,param2,...rest) => {statements}
+(param1 = defaultValue1,param1,...,paramN = defaultValueN) => {statements}
+//Destruring within the parameter list is also supported
+var f = ([a,b]) = [1,2],{x:c} = ({x:a+b}) => a+b+c;
+f();
+*/
+var a = ["Hydrogen","Helium","Lithium","Beryllium"];
+var a2 = a.map(function(s){return s.length});
+var a3 = a.map( s => s.length);
+function Person(){
+	var self = this;
+	self.age = 0;
+	setInterval(function growUp(){
+		self.age++;
+	},1000);
+}
+
+var p = new Person();
+/*
+与strict mode的关系
+考虑到this是词法层面上的，严格模式中于this相关的规则豆浆被忽略
+*/
+var f = () => {'use strict';return this};
+f() === window;
+
+//使用call或apply调用
+var adder = {
+	base:1,
+	add:function(a){
+		var f = v => v + this.base;
+		return f(a);
+	},
+	addThruCall:function(a){
+		var f = v => v + this.base;
+		var b = {
+			base : 2
+		};
+		return f.call(b,a);
+	}
+};
+console.log(adder.add(1));
+console.log(adder.addThruCall(1));
+//不绑定arguments
+var arguments = 42;
+var arr = () => arguments;
+arr();
+function foo(){
+	var f = () => arguments[0];
+	return f(2);
+}
+foo(1);
+
+'use strict';
+var obj = {
+	i: 10,
+	b: () => console.log(this.i,this),
+	c:function(){
+		console.log(this.i,this)
+	}
+}
+obj.b();
+obj.c();
+
+var obj = {
+	a: 10
+};
+Object.defineProperty(obj,"b",{
+	get: () => {
+		console.log(this.a,typeof this.a,this);
+		return this.a+10;
+	}
+})
+
+var func = () => { foo: 1 };
+var func = () => { foo:function(){}};
+
+//换行
+var func = ()
+			=>1;//SyntaxError:expected expression,got '=>'
+//解析顺序
+/*
+在箭头函数中的箭头不是操作符（或者运算符，就像'+ -'那些），但是箭头函数有特殊的解析规则就是：相比普通的函数，随着操作符优先级不同交互也不同。
+let callback;
+callback = callback || function(){};//ok
+callback = callback || () => {};//SyntaxError: invalid arrow-function arguments
+callback = callback || (() => {});
+*/
+let empty = () => {};
+(() => "foobar")()
+var simple = a => a > 15 ? 15 : a;
+simple(16);
+let max = (a,b) => a>b ? a:b;
+var arr = [5,6,13,0,1,18,23];
+var sum = arr.reduce((a,b) = > a+b);
+var even = arr.filter(v => v%2 == 0);
+var double = arr.map(v => v*2);
+promise.then(a => {
+}).then(b =>{
+});
+</script>
+</body>
+</html>

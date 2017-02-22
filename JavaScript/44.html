@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+function multiply(a,b){
+	b = typeof b !== 'undefined' ? b:1;
+	return a*b;
+}
+multiply(5);
+/*
+传入undefined，第二次函数调用中，即使显式传入了undefined,color参数的值也会取默认值。
+*/
+function setBackgroundColor(element,color = 'rosybrown'){
+	element.style.backgroundColor = color;
+}
+setBackgroundColor(someDiv);
+setBackgroundColor(someDiv,undefined);
+setBackgroundColor(someDiv,'blue');
+/*
+调用时解析
+在函数被调用时，参数默认值会被解析，所以不像Python中的例子，每次函数调用时都会创建一个新的参数对象
+*/
+function append(value,array = []){
+	array.push(value);
+	return array;
+}
+append(1);
+append(2);
+function callSomething(thing = something()){
+	return thing
+}
+function something(){
+	return "sth";
+}
+callSomething();
+function singularAutoPlural(singular,plural = singular + "s",
+								rallyingCry = plural + "ATTACK!!!"){
+	return[singular,plural,rallyingCry];
+}
+singularAutoPlural("Gecko");
+singularAutoPlural("Fox","Foxes");
+singularAutoPlural("Deer","Deer","Deer peaceably and respectfully petition the government for positive change.")
+
+function go(){
+	return ":p"
+}
+function withDefaults(a,b = 5,c = b,d = go(),e = this,f = arguments, g = this.value){
+	return [a,b,c,d,e,f,g];
+}
+function withoutDefaults(a,b,c,d,e,f,g){
+	switch(arguments.length){
+		case 0:
+		a
+		case 1:
+		b = 5
+		case 2:
+		c = b
+		case 3:
+		d = go();
+		case 4:
+		e = this
+		case 5:
+		f = arguments
+		case 6:
+		g = this.value;
+		default:
+	}
+	return [a,b,c,d,e,f,g];
+}
+withDefaults.call({value:"=^_^="});
+withoutDefaults.call({value:"=^_^="});
+
+function f(a = go()){
+	function go(){return ":p"}
+}
+
+function f(x=1,y){
+	return [x,y];
+}
+f();
+function f([x,y] = [1,2],{z:z} = {z:3}){
+	return x+y+z;
+}
+f();
+</script>
+</body>
+</html>

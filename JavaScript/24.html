@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+	//break语句中止当前循环，switch语句或label语句，并把程序控制流转到紧接着被终止语句后面的语句。
+	function testBreak(x){
+		var i = 0;
+		while(i<6){
+			if(i == 3){
+				break;
+			}
+			i+=1;
+		}
+		return i*x;
+	}
+	outer_block:{
+		inner_block:{
+			console.log('1');
+			break outer_block;
+			console.log(':-(');
+		}
+	console.log('2');
+	}
+	//
+	block_1:{
+		console.log('1');
+		break block_2;
+	}
+	block_2:{
+		console.log('2')
+	}
+</script>
+</body>
+</html>

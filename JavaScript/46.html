@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+/*
+剩余参数
+剩余参数语序长度不确定的实参表示为一个数组
+function(a,b,...theArgs){
+	//...
+}
+如果一个函数的最后一个形参是以...为前缀的，则在函数被调用时，改形参会成为一个数组，数组中的元素都是传递给改函数的多出来的实参的值
+*/
+/*
+剩余参数和arguments对象的区别
+剩余参数只包含哪些没有对应形参的实参，而arguments对象包含了传给函数的所有实参
+arguments对象不是一个真实的数组，而剩余参数是真实的Array实例，也就是说你能够在它上面直接使用所有的数组方法，比如sort，map,forEach,pop
+arguments对象对象还有一些附加的属性（比如callee属性）
+*/
+function f(a,b){
+	var args = Array.prototype.slice.call(arguments,f.length);
+}
+function(a,b,...args){
+
+}
+function multiply(multiplier,..theArgs){
+	return theArgs.map(function(element){
+		return multiplier * element;
+	})
+}
+var arr = multiply(2,1,2,3);
+console.log(arr);
+
+function sortArguments(){
+	var sortedArgs = arguments.sort();
+	return sortedArgs;//不会执行到这里
+}
+</script>
+</body>
+</html>

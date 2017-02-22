@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+/*
+arguments是一个类数组对象。代表传给一个function的参数列表。
+anguments对象是函数内部的本地变量；anguments已经不再是函数的属性了
+arguments.callee指向当前执行的函数
+argunments.caller指向调用当前函数的函数
+arguments.length指向传递给当前函数的参数数量
+*/
+function myConcat(separator){
+	var args = Array.prototype.slice.call(arguments,1);
+	return args.join(separator);
+}
+myConcat(",","red","orange","blue");
+myConcat(";","elephant","giraffe","lion","cheetah");
+myConcat(".","sage","basil","oregano","pepper","parsley");
+function list(type){
+	var result = "<" + type + "l<li>";
+	var args = Array.prototype.slice.call(arguments,1);
+	result +=args.join("</li><li>");
+	result += "</li></" + type + "l>";
+	return result;
+}
+</script>
+</body>
+</html>

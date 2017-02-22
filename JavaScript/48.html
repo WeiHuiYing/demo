@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+/*
+set语法可以将一个函数绑定在当前对象的制定属性上，当那个属性被赋值是，你所绑定的函数就会被调用
+{set prop(val){...}}
+{set [expression](val){...}}
+prop将被指定函数绑定的属性名
+val存有将要赋给prop的值的变量的代称
+expression从ECMAScript6开始，将被指定函数绑定的属性名可以是一个表达式
+使用set语法时请注意：
+它的标识符可以是number与string二者之一
+它必须有一个明确的参数
+在同一个对象中，不能为一个已有真实值的变量使用set，也不能为一个属性设置多个set。({set x(v){},set x(v){}}和{x: ...,set x(v){}}是不允许的)
+*/
+var o = {
+	set current (str){
+		return this.log[this.log.length] = str;
+	},
+	log:[]
+}
+delete o.current;
+var o = {a:0};
+Object.definepRroperty(o,"b",{set:function(x){this.a = x/2;}});
+o.b = 10;
+console.log(o.a);
+//使用computed属性名
+var expr = "foo";
+var obj = {
+	baz:"bar",
+	set[expr](v){this.baz = v;}
+}
+console.log(obj.baz);
+obj.foo = "baz";
+console.log(obj.baz)
+</script>
+</body>
+</html>

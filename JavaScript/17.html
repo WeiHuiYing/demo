@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+	<script>
+    	/*function Car(){
+			car1 = new Car;
+			alert(car1.color);
+			Car.prototype.color = null;
+			alert(car1.color);
+			car1.color="black";
+			alert(car1.color);
+		}*/
+		function car(make,model,year){
+			this.make = make;
+			this.model = model;
+			this.year = year;	
+		}
+		var mycar = new car("Eagle","Talon TSi",1993);
+		var kenscar = new car("Nissan","300ZX",1992);
+    </script>
+</body>
+</html>

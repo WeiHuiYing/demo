@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+/*
+定义类
+类实际上是个“特殊的函数”，而且正如函数的定义方式有函数声明和函数表达式两种一样，类的定义方式也有两种，分别是：类声明和类表达式。
+类声明是定义类的一种方式，就像下面这样，使用class关键字后跟一个类名，就可以定义一个类
+*/
+class Polygon{
+	constructor(height,width){
+		this.height = height;
+		this.width = width;
+	}
+}
+/*
+变量提升
+类声明和函数声明不同的一点是，函数声明存在变量提升现象，而类声明不会。也就是说，你必须先声明类，然后才能使用它，否则代码会抛出ReferenceError异常，例如
+var p = new Poltgon();
+class Polygon{}
+*/
+/*
+类表达式
+类表达式是定义类的另外一种方式。在类表达式中，类名是可有可无的。如果定义了类名，则该类名只有在类体内部才能访问到
+*/
+//匿名的
+var Polygon = class{
+	constructor(height,width){
+		this.height = height;
+		this.width = width;
+	}
+}
+//命名的
+var Poltgon = class Polygon{
+	constructor(height,width){
+		this.height = height;
+		this.width = width;
+	}
+}
+//注意：类表达式和类声明一样也不会有提升的现象
+class Polygon{
+	constructor(height,width){
+		this.height = height;
+		this.width = width;
+	}
+	get area(){
+		return this.calcArea()
+	}
+	calcArea(){
+		return this.height*this.width;
+	}
+}
+const square = new Polygon(10,10);
+console.log(squarea.area);
+//静态方法
+//static关键字用来定义类的静态方法。静态方法是指那些不需要对类进行实例化，使用类名就可以直接访问的方法，需要注意的事静态方法不能被实例化的对象调用。静态方法经常用来作为工具函数
+class Point{
+	constructor(x,y){
+		this.x = x;
+		this.y = y;
+	}
+	static distance(a,b){
+		const dx = a.x - b.x;
+		const dy = a.y - b.y;
+		return Math.sqrt(dx*dx+dy*dy);
+	}
+}
+const p1 = new Point(5,5);
+const p2 = new Point(10,10);
+console.log(Point.distance(p1,p2));
+//使用extends创建子类
+class Animal{
+	constructor(name){
+		this.name = name;
+	}
+	speak(){
+		console.log(this.name+'makes a noise.');
+	}
+}
+class Dog extends Animal{
+	speak(){
+		console.log(this.name+'barks.');
+	}
+}
+var d = new Dog('Mitzie');
+d.speak();
+
+
+function Animal (name){
+	this.name = name;
+}
+Animal.prototype.speak = function(){
+	console.log(this.name + 'makes a noise.');
+}
+class Dog extends Animal{
+	speak(){
+		console.log(this.name + 'makes a noise.');
+	}
+};
+class Dog extends Animal{
+	speak(){
+		super.speak();
+		console.log(this.name + 'barks.');
+	}
+}
+var d = new Dog('Mitzie');
+d.speak();
+
+//需要注意的是类不能继承一般（非构造的）对象。如果你想要创建的类继承某个一般对象的话，你要使用Object.setPrototypeOf()
+var Animal = {
+	speak(){
+		console.log(this.name + 'makes a noise.');
+	}
+};
+class Dog{
+	constructor(name){
+		this.name = name;
+	}
+	speak(){
+		super.speak();
+		console.log(this.name+ 'barks.');
+	}
+}
+Object.setPrototypeOf(Dog.prototype,Animal);
+var d = new Dog('Mitzie');
+d.speak();
+//Species你可能想要数组类MyArray返回的事Array对象。这个species模式能让你重写默认的构造器。
+class MyArray extends Array{
+	static get [Symbol.species](){
+		return Array;
+	}
+}
+var a = new MyArray(1,2,3);
+var mapped = a.mao(x => x*x);
+console.log(mapped instanceof MyArray);
+console.log(mapped instanceof Array);
+//使用super引用父类
+class Cat{
+	constructor(name){
+		this.name = name;
+	}
+	speak(){
+		console.log(this.name + 'make a noise.');
+	}
+}
+class Lion extends Cat{
+	speak(){
+		super.speak();
+		console.log(this.name+'roars.');
+	}
+}
+//Mix-ins
+var calculatorMixin = Base => class extends Base{
+	calc(){}
+}
+var randomizerMixin = Base => class extends Base{
+	randomize(){}
+}
+class Foo{}
+class Bar extends calculatorMixin(randomizerMixin(Foo)){}
+</script>
+</body>
+</html>

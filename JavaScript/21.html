@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+	//yield关键字用来暂停和继续一个生成器函数
+	//yield[[expression用作返回值，如果忽略，将返回undefined]]
+	//yield*[[expression]]; 生成器中，yield*可以把需要yield的值委托给另外一个生成器或者其他任意的可迭代对象
+	function* foo(){
+		var index = 0;
+		while (index <= 2)
+		yield index++;
+	}
+	var iterator = foo();
+	console.log(iterator.next());//{value:0,done:false}
+	console.log(iterator.next());//{value:1,done:false}
+	console.log(iterator.next());//{value:2,done:false}
+	console.log(iterator.next());//{value:undefined,done:true}
+	
+	function* g1(){
+		yield 2;
+		yield 3;
+		yield 4;
+	}
+	function* g2(){
+		yield 1;
+		yield* g1();
+		yield 5;
+	}
+	var iterator = g2();
+	console.log(iterator.next());//{value:1,done:false}
+	console.log(iterator.next());//{value:2,done:false}
+	console.log(iterator.next());//{value:3,done:false}
+	console.log(iterator.next());//{value:4,done:false}
+	console.log(iterator.next());//{value:5,done:false}
+	console.log(iterator.next());//{value:undefined,done:true}
+	
+	function* g4(){
+		yield* [1,2,3];
+		return "foo";
+	}
+	var result;
+	function* g5(){
+		result = yield* g4();
+	}
+	var iterator = g5();
+	
+	console.log(iterator.next());//{value:1,done:false}
+	console.log(iterator.next());//{value:2,done:false}
+	console.log(iterator.next());//{value:3,done:false}
+	console.log(iterator.next());//{value:undefined,done:true},此时g4()反悔了{value:"foo",done:true}
+	
+	console.log(result)//"foo"
+</script>
+</body>
+</html>

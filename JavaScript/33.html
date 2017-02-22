@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+/*
+for each(variable in object){
+	statement
+}
+variable用来遍历属性值的变量，前面的var关键字是可选的，该变量是函数的局部变量而不是语句块的局部变量
+object该对象的属性值会被遍历
+statement遍历属性值时执行的语句，如果想要执行多条语句，请用({ ... })将多条语句括住
+*/
+var sum = 0;
+var obj = {prop: 5,prop2: 13,prop3: 8};
+for each(var item in obj){
+	sum += item;
+}
+console.log(sum);
+</script>
+</body>
+</html>
